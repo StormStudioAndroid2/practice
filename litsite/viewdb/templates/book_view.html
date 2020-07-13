@@ -1,0 +1,20 @@
+{% load bootstrap4 %}
+<script src="{% bootstrap_jquery_url %}"></script>
+{% bootstrap_javascript %}
+{% bootstrap_css %}
+<div class="container">
+    <div class="row">
+<div class = "col align-self-center">
+    {% block content %}
+
+<h4>{{ book.title }}</h4>
+{% endblock %}
+
+<ul>
+    <li>Автор: {{ book.author }}</li>
+<li>Издательство: {{ book.publisher }}</li>
+
+</ul>
+</div>
+</div>
+</div>

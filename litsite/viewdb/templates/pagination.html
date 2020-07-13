@@ -1,0 +1,35 @@
+
+{% load bootstrap4 %}
+<script src="{% bootstrap_jquery_url %}"></script>
+{% bootstrap_javascript %}
+{% bootstrap_css %}
+
+
+<div class =  "container">
+    {% block title %}
+    <h4>Пагинация</h4>
+{% endblock %}
+
+    <table class="table">
+        <tr>
+            <td> Автор </td>
+            <td>Название </td>
+            <td> Издательство </td>
+
+        </tr>
+        {% for book in pages %}
+            <tr>
+                <td>{{ book.author }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.publisher }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+    <hr>
+
+    {% bootstrap_pagination pages url="/viewdb/pagination?page=1&flop=flip" extra="q=foo" size="small" %}
+
+
+</div>
