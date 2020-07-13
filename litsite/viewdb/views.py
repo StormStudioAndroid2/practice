@@ -50,57 +50,13 @@ class BookPagination(TemplateView):
             page_number = paginator.page(1)
         context['pages'] = page_number
         return context
-# class BooksSearchView(es_views.ListElasticAPIView):
-#     # es_client = Elasticsearch(hosts=['localhost:9200/'],
-#     #                           connection_class=RequestsHttpConnection)
-#     # es_model = BooksIndex
-#     # es_pagination_class = es_pagination.ElasticLimitOffsetPagination
 
-#     # es_filter_backends = (
-#     #     es_filters.ElasticSearchFilter,
-#     # )
-  
-#     # es_search_fields = (
-#     #     'title',
-#     #     'author'
-     
-#     # )
-#     q = request.GET.get('q', None)
-#     page = int(request.GET.get('page', '1'))
-#     start = (page-1) * 10
-#     end = start + 10
 
-#         query = MultiMatch(query='search', fields=['title', 'author', 'py], fuzziness='AUTO')
-#         s = Search(using=elastic_client, index='books').query(query)[start:end]
-#         context = super().get_context_data(**kwargs)
-#         lines = Books.objects.all()
-#         paginator = Paginator(lines, 10)
-#         page = self.request.GET.get("page")
-#         try:
-#             page_number = paginator.page(page)
-#         except EmptyPage:
-#             page_number = paginator.page(1)
-#         except PageNotAnInteger:
-#             page_number = paginator.page(1)
-#         context['pages'] = page_number
-#         return context
 
 class BooksSearchView(TemplateView):
     template_name = "pagination.html"
-    # es_client = Elasticsearch(hosts=['localhost:9200/'],
-    #                           connection_class=RequestsHttpConnection)
-    # es_model = BooksIndex
-    # es_pagination_class = es_pagination.ElasticLimitOffsetPagination
 
-    # es_filter_backends = (
-    #     es_filters.ElasticSearchFilter,
-    # )
-  
-    # es_search_fields = (
-    #     'title',
-    #     'author'
-    #     'publisher'
-    # )
+
     def get_context_data(self, **kwargs):
 
         context = super().get_context_data(**kwargs)
@@ -110,7 +66,6 @@ class BooksSearchView(TemplateView):
         start = (page-1) * 10
         end = start + 10
         
-        # q = urllib.parse.quote(q.encode('utf8'))
         query = MultiMatch(query=q, fields=['title', 'author', 'publisher'], fuzziness='AUTO')
         s = Search(using=es_client, index='books').query(query)[start:end]
         context = super().get_context_data(**kwargs)
